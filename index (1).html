@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICAFE Merak Jingga — Gaming Café 24 Jam Medan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0b0f;
+    --surface: #111220;
+    --card: #13141f;
+    --purple: #7c3aed;
+    --purple-light: #a855f7;
+    --purple-glow: rgba(124,58,237,0.25);
+    --text: #e8e9f0;
+    --muted: #7b7c8d;
+    --accent-gold: #f59e0b;
+    --border: rgba(124,58,237,0.2);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 64px;
+    background: rgba(10,11,15,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    color: var(--text);
+  }
+  .nav-logo span { color: var(--purple-light); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    background: var(--purple);
+    color: #fff !important;
+    padding: 0.45rem 1.1rem;
+    border-radius: 6px;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--purple-light) !important; color: #fff !important; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 5% 4rem;
+    overflow: hidden;
+  }
+
+  /* Scanline overlay — the signature texture */
+  #hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.18) 2px,
+      rgba(0,0,0,0.18) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Ambient purple radial bloom */
+  #hero::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(124,58,237,0.22) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 800px; }
+
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    background: rgba(124,58,237,0.12);
+    border: 1px solid rgba(124,58,237,0.3);
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 4.2rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+    animation: flicker 6s infinite;
+  }
+
+  .hero-title .highlight {
+    color: var(--purple-light);
+    text-shadow: 0 0 30px rgba(168,85,247,0.6), 0 0 60px rgba(168,85,247,0.3);
+  }
+
+  @keyframes flicker {
+    0%, 95%, 100% { opacity: 1; }
+    96% { opacity: 0.92; }
+    97% { opacity: 1; }
+    98% { opacity: 0.95; }
+    99% { opacity: 1; }
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    font-weight: 400;
+    line-height: 1.7;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--purple);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.8rem 1.8rem;
+    border-radius: 8px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    box-shadow: 0 0 20px var(--purple-glow);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover {
+    background: var(--purple-light);
+    box-shadow: 0 0 32px rgba(168,85,247,0.4);
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.8rem 1.8rem;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-ghost:hover {
+    border-color: var(--purple-light);
+    background: var(--purple-glow);
+  }
+
+  /* ── STAT BAR ── */
+  #stats {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 2rem 5%;
+  }
+
+  .stats-grid {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .stat-item {
+    flex: 1;
+    text-align: center;
+    padding: 1rem 1.5rem;
+    position: relative;
+  }
+  .stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 20%;
+    height: 60%;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .stat-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--purple-light);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+    text-shadow: 0 0 20px rgba(168,85,247,0.4);
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ── SECTIONS SHARED ── */
+  section { padding: 5rem 5%; }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .section-desc {
+    color: var(--muted);
+    max-width: 480px;
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+
+  .section-header { margin-bottom: 3.5rem; }
+  .section-header.centered { text-align: center; }
+  .section-header.centered .section-desc { margin: 0 auto; }
+
+  /* ── PRICING ── */
+  #pricing { background: var(--surface); }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .price-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem 1.75rem;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .price-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+  }
+
+  .price-card.featured {
+    border-color: var(--purple);
+    box-shadow: 0 0 0 1px var(--purple), 0 0 40px var(--purple-glow);
+    transform: scale(1.03);
+  }
+  .price-card.featured:hover { transform: scale(1.03) translateY(-4px); }
+
+  .featured-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--purple);
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.3rem 1rem;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .plan-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .plan-price {
+    margin-bottom: 0.25rem;
+  }
+  .plan-price .amount {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1;
+  }
+  .plan-price .amount span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .plan-duration {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .plan-perks {
+    list-style: none;
+    margin-bottom: 1.75rem;
+  }
+  .plan-perks li {
+    font-size: 0.875rem;
+    color: var(--muted);
+    padding: 0.4rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .plan-perks li:last-child { border-bottom: none; }
+  .plan-perks li::before {
+    content: '✓';
+    color: var(--purple-light);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .btn-card {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .btn-card.outline {
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .btn-card.outline:hover { border-color: var(--purple-light); background: var(--purple-glow); }
+  .btn-card.solid {
+    background: var(--purple);
+    color: #fff;
+    box-shadow: 0 0 16px var(--purple-glow);
+  }
+  .btn-card.solid:hover { background: var(--purple-light); }
+
+  /* ── FEATURES ── */
+  #features { background: var(--bg); }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+
+  .feature-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .feature-card:hover {
+    border-color: rgba(124,58,237,0.45);
+    transform: translateY(-3px);
+  }
+
+  .feature-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .feature-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+
+  .feature-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── REVIEWS ── */
+  #reviews { background: var(--surface); }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .review-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .review-stars {
+    color: var(--accent-gold);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+
+  .review-text {
+    font-size: 0.875rem;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    font-style: italic;
+    opacity: 0.9;
+  }
+
+  .review-author {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--purple-light);
+    letter-spacing: 0.06em;
+  }
+  .review-date {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #07080c;
+    border-top: 1px solid var(--border);
+    padding: 3rem 5% 2rem;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+    max-width: 960px;
+    margin: 0 auto 2rem;
+  }
+
+  .footer-brand .nav-logo { font-size: 1.2rem; margin-bottom: 0.75rem; display: block; }
+  .footer-brand p { font-size: 0.82rem; color: var(--muted); max-width: 220px; line-height: 1.7; }
+
+  .footer-info h4 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+  .footer-info p {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.75;
+  }
+  .footer-info a { color: var(--purple-light); text-decoration: none; }
+  .footer-info a:hover { text-decoration: underline; }
+
+  .footer-bottom {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  /* ── WHATSAPP FAB ── */
+  .wa-fab {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #25d366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    z-index: 200;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .wa-fab:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.55); }
+  .wa-fab svg { width: 28px; height: 28px; fill: #fff; }
+
+  /* ── AI CHAT BUTTON ── */
+  .ai-chat-btn {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 5.5rem;
+    background: var(--purple);
+    color: #fff;
+    border: none;
+    border-radius: 28px;
+    padding: 0.65rem 1.2rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 20px var(--purple-glow);
+    z-index: 200;
+    transition: background 0.2s, transform 0.15s;
+    letter-spacing: 0.02em;
+  }
+  .ai-chat-btn:hover { background: var(--purple-light); transform: translateY(-2px); }
+  .ai-chat-btn .dot {
+    width: 7px; height: 7px;
+    background: #a3ffb0;
+    border-radius: 50%;
+    animation: pulse-dot 2s infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.3); }
+  }
+
+  /* ── AI CHAT MODAL ── */
+  .chat-modal {
+    display: none;
+    position: fixed;
+    bottom: 6rem;
+    right: 1.5rem;
+    width: 360px;
+    max-height: 520px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+    z-index: 300;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .chat-modal.open { display: flex; }
+
+  .chat-header {
+    background: var(--purple);
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .chat-header-info { display: flex; align-items: center; gap: 0.6rem; }
+  .chat-avatar {
+    width: 32px; height: 32px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .chat-header-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #fff;
+  }
+  .chat-header-status {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.75);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .chat-header-status::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: #a3ffb0;
+    border-radius: 50%;
+  }
+  .chat-close {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.8);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.2rem;
+    line-height: 1;
+  }
+  .chat-close:hover { color: #fff; }
+
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .chat-messages::-webkit-scrollbar { width: 4px; }
+  .chat-messages::-webkit-scrollbar-track { background: transparent; }
+  .chat-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .msg {
+    max-width: 82%;
+    padding: 0.65rem 0.9rem;
+    border-radius: 12px;
+    font-size: 0.84rem;
+    line-height: 1.55;
+  }
+  .msg.bot {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    color: var(--text);
+  }
+  .msg.user {
+    background: var(--purple);
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+  .msg.typing {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0.75rem 1rem;
+  }
+  .msg.typing span {
+    width: 6px; height: 6px;
+    background: var(--muted);
+    border-radius: 50%;
+    animation: typing-bounce 1.2s infinite;
+  }
+  .msg.typing span:nth-child(2) { animation-delay: 0.2s; }
+  .msg.typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typing-bounce {
+    0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
+    40% { transform: translateY(-5px); opacity: 1; }
+  }
+
+  .chat-input-area {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .chat-input {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.55rem 0.85rem;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.84rem;
+    outline: none;
+    resize: none;
+    max-height: 80px;
+    transition: border-color 0.2s;
+  }
+  .chat-input:focus { border-color: var(--purple-light); }
+  .chat-input::placeholder { color: var(--muted); }
+
+  .chat-send {
+    background: var(--purple);
+    border: none;
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    align-self: flex-end;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .chat-send:hover { background: var(--purple-light); }
+  .chat-send svg { width: 16px; height: 16px; fill: #fff; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--border); padding: 1rem 5%; gap: 1rem; }
+    .nav-links.open { display: flex; }
+    .hamburger { display: flex; }
+
+    .pricing-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+    .price-card.featured { transform: none; }
+    .price-card.featured:hover { transform: translateY(-4px); }
+
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+    .reviews-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+
+    .stats-grid { flex-wrap: wrap; }
+    .stat-item { flex: 0 0 33.33%; }
+    .stat-item:not(:last-child)::after { display: none; }
+
+    .footer-inner { flex-direction: column; }
+
+    .chat-modal { width: calc(100vw - 2rem); right: 1rem; bottom: 5.5rem; }
+    .ai-chat-btn { font-size: 0;  width: 56px; height: 56px; border-radius: 50%; padding: 0; justify-content: center; right: 5.5rem; }
+    .ai-chat-btn .dot { display: none; }
+    .ai-chat-btn::after { content: '🤖'; font-size: 1.4rem; }
+  }
+
+  @media (max-width: 480px) {
+    .features-grid { grid-template-columns: 1fr; }
+    .hero-btns { flex-direction: column; align-items: center; }
+    .stat-value { font-size: 1.6rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-title { animation: none; }
+    .dot { animation: none; }
+    .msg.typing span { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">ICAFE <span>MERAK JINGGA</span></span>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#pricing">Harga</a></li>
+    <li><a href="#features">Fasilitas</a></li>
+    <li><a href="#reviews">Ulasan</a></li>
+    <li><a href="https://wa.me/6282151520525" class="nav-cta">WhatsApp</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <span class="hero-eyebrow">⚡ Medan's #1 Gaming Café</span>
+    <h1 class="hero-title">
+      Main Tanpa Batas,<br>
+      <span class="highlight">Performa Tanpa Kompromi</span>
+    </h1>
+    <p class="hero-sub">
+      PC spek dewa, internet 1 Gbps fiber, AC dingin — buka 24 jam setiap hari. 
+      Mulai Rp 8 ribu per jam.
+    </p>
+    <div class="hero-btns">
+      <a href="https://wa.me/6282151520525?text=Halo%2C%20saya%20mau%20pesan%20tempat%20di%20ICAFE%20Merak%20Jingga" class="btn-primary">
+        🎮 Pesan Sekarang
+      </a>
+      <a href="#pricing" class="btn-ghost">
+        Lihat Paket →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STAT BAR -->
+<div id="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-value">4.9★</div>
+      <div class="stat-label">Rating Google</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">24H</div>
+      <div class="stat-label">Buka Setiap Hari</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">1Gbps</div>
+      <div class="stat-label">Internet Fiber</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-header centered">
+    <div class="section-label">Paket Main</div>
+    <h2 class="section-title">Harga Jelas, Nilai Maksimal</h2>
+    <p class="section-desc">Pilih paket sesuai kebutuhanmu — dari nongkrong singkat sampai sesi semalaman.</p>
+  </div>
+
+  <div class="pricing-grid">
+    <!-- 2 JAM -->
+    <div class="price-card">
+      <div class="plan-name">Paket Cepat</div>
+      <div class="plan-price">
+        <span class="amount">Rp 20<span>k</span></span>
+      </div>
+      <div class="plan-duration">2 Jam Bermain</div>
+      <ul class="plan-perks">
+        <li>Akses semua PC gaming</li>
+        <li>Internet 1 Gbps</li>
+        <li>AC dingin & headset</li>
+        <li>Toilet bersih</li>
+      </ul>
+      <a href="https://wa.me/6282151520525" class="btn-card outline">Pilih Paket Ini</a>
+    </div>
+
+    <!-- 5 JAM (FEATURED) -->
+    <div class="price-card featured">
+      <div class="featured-badge">⚡ Paling Populer</div>
+      <div class="plan-name">Paket Sore</div>
+      <div class="plan-price">
+        <span class="amount">Rp 40<span>k</span></span>
+      </div>
+      <div class="plan-duration">5 Jam Bermain · Rp 8k/jam</div>
+      <ul class="plan-perks">
+        <li>Akses semua PC gaming</li>
+        <li>Internet 1 Gbps fiber</li>
+        <li>AC dingin & headset premium</li>
+        <li>Toilet bersih, loker aman</li>
+        <li>Snack & minuman tersedia</li>
+      </ul>
+      <a href="https://wa.me/6282151520525?text=Halo%2C%20saya%20mau%20paket%205%20jam%20di%20ICAFE%20Merak%20Jingga" class="btn-card solid">Pesan Paket 5 Jam</a>
+    </div>
+
+    <!-- OVERNIGHT -->
+    <div class="price-card">
+      <div class="plan-name">Paket Overnight</div>
+      <div class="plan-price">
+        <span class="amount">Rp 70<span>k</span></span>
+      </div>
+      <div class="plan-duration">Satu Malam Penuh</div>
+      <ul class="plan-perks">
+        <li>Akses semua PC gaming</li>
+        <li>Internet 1 Gbps fiber</li>
+        <li>AC dingin & headset premium</li>
+        <li>Toilet bersih, loker aman</li>
+        <li>Cocok untuk nonstop session</li>
+      </ul>
+      <a href="https://wa.me/6282151520525" class="btn-card outline">Pilih Overnight</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-header centered">
+    <div class="section-label">Kenapa Pilih Kami</div>
+    <h2 class="section-title">Pengalaman Gaming Kelas Satu</h2>
+    <p class="section-desc">Setiap detail dirancang agar kamu bisa fokus main tanpa gangguan.</p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">⚡</span>
+      <div class="feature-title">Internet 1 Gbps</div>
+      <p class="feature-desc">Fiber optic dedicated. Ping rendah, nol buffering, koneksi stabil untuk semua game online.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🖥️</span>
+      <div class="feature-title">PC Spek Tinggi</div>
+      <p class="feature-desc">GPU terkini, RAM besar, monitor high-refresh. Semua game berjalan smooth tanpa kompromi.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">❄️</span>
+      <div class="feature-title">AC & Ruang Nyaman</div>
+      <p class="feature-desc">Ruangan ber-AC penuh, kursi ergonomis, pencahayaan gaming yang bikin mata nggak cepat lelah.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🌙</span>
+      <div class="feature-title">Buka 24 Jam</div>
+      <p class="feature-desc">Mau main tengah malam, subuh, atau liburan — kami selalu buka. Tidak ada jam tutup.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="section-header centered">
+    <div class="section-label">Kata Mereka</div>
+    <h2 class="section-title">4.9★ dari Ratusan Gamer</h2>
+    <p class="section-desc">Jangan percaya kami — percaya komunitas gaming Medan.</p>
+  </div>
+
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Paling enak main di sini, koneksinya kenceng banget. Ping ke server Singapore cuma 8ms. AC dingin, kursinya nyaman buat sesi panjang."</p>
+      <div class="review-author">Rizky A.</div>
+      <div class="review-date">Google Review · 2 minggu lalu</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Paket 5 jam Rp 40k itu worth banget. Tempat bersih, toiletnya juga bersih. Sering overnight di sini sama squad, aman dan nyaman."</p>
+      <div class="review-author">Dinda P.</div>
+      <div class="review-date">Google Review · 1 bulan lalu</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Staff ramah, PC tidak pernah lag, internet super cepat. Sudah jadi langganan sejak setahun lalu. Icafe terbaik di Medan, no debat!"</p>
+      <div class="review-author">Bintang M.</div>
+      <div class="review-date">Google Review · 3 minggu lalu</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="nav-logo">ICAFE <span>MERAK JINGGA</span></span>
+      <p>Gaming café 24 jam terbaik di Medan dengan spesifikasi premium dan harga terjangkau.</p>
+    </div>
+    <div class="footer-info">
+      <h4>Lokasi</h4>
+      <p>Jl. Putri Merak Jingga No.63<br>Medan, Sumatera Utara</p>
+    </div>
+    <div class="footer-info">
+      <h4>Kontak</h4>
+      <p>
+        <a href="https://wa.me/6282151520525">+62 821-5152-0525</a><br>
+        Buka 24 Jam · 7 Hari Seminggu
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 ICAFE Merak Jingga · Medan · All rights reserved.
+  </div>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<a href="https://wa.me/6282151520525?text=Halo%20ICAFE%20Merak%20Jingga%2C%20saya%20mau%20tanya%20soal%20ketersediaan%20tempat" class="wa-fab" title="Chat WhatsApp" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- AI CHAT BUTTON -->
+<button class="ai-chat-btn" id="aiChatBtn" onclick="toggleChat()">
+  <span class="dot"></span>
+  Tanya AI
+</button>
+
+<!-- AI CHAT MODAL -->
+<div class="chat-modal" id="chatModal">
+  <div class="chat-header">
+    <div class="chat-header-info">
+      <div class="chat-avatar">🤖</div>
+      <div>
+        <div class="chat-header-name">Asisten ICAFE</div>
+        <div class="chat-header-status">Online sekarang</div>
+      </div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="msg bot">Halo! Saya asisten ICAFE Merak Jingga 👾 Mau tanya soal harga, fasilitas, atau langsung pesan tempat? Tanya aja!</div>
+  </div>
+  <div class="chat-input-area">
+    <textarea class="chat-input" id="chatInput" placeholder="Ketik pesanmu..." rows="1" onkeydown="handleKey(event)"></textarea>
+    <button class="chat-send" onclick="sendMessage()">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  const SYSTEM_PROMPT = `You are a sales agent for ICAFE Merak Jingga, a top-rated (4.9★) gaming café in Medan open 24 hours. Your job is to convert every inquiry into a booking or visit. Lead with the value: premium specs, zero lag, 1Gbps fiber, clean bathrooms, AC — all for Rp 40k/5 hours. Counter price objections by anchoring to the per-hour cost (Rp 8k/hour). For overnight visitors, highlight the Rp 70k overnight package. Always close with a specific call-to-action: "Mau langsung ke sini sekarang? Kami buka 24 jam — Jl. Putri Merak Jingga No.63." Respond in Indonesian, be friendly and conversational. Keep responses concise (2-4 sentences max). Use gaming slang naturally when appropriate. Never use markdown formatting — plain text only.`;
+
+  let chatOpen = false;
+  let chatHistory = [];
+
+  function toggleChat() {
+    chatOpen = !chatOpen;
+    document.getElementById('chatModal').classList.toggle('open', chatOpen);
+    if (chatOpen) document.getElementById('chatInput').focus();
+  }
+
+  function handleKey(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  }
+
+  async function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return;
+
+    input.value = '';
+    appendMsg(text, 'user');
+    chatHistory.push({ role: 'user', content: text });
+
+    const typing = appendTyping();
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 1000,
+          system: SYSTEM_PROMPT,
+          messages: chatHistory
+        })
+      });
+
+      const data = await response.json();
+      const reply = data.content?.map(b => b.text || '').join('') || 'Maaf, ada gangguan. Coba lagi ya!';
+
+      typing.remove();
+      appendMsg(reply, 'bot');
+      chatHistory.push({ role: 'assistant', content: reply });
+    } catch (err) {
+      typing.remove();
+      appendMsg('Maaf, ada masalah koneksi. Hubungi kami langsung via WhatsApp ya!', 'bot');
+    }
+  }
+
+  function appendMsg(text, role) {
+    const msgs = document.getElementById('chatMessages');
+    const div = document.createElement('div');
+    div.className = `msg ${role}`;
+    div.textContent = text;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+    return div;
+  }
+
+  function appendTyping() {
+    const msgs = document.getElementById('chatMessages');
+    const div = document.createElement('div');
+    div.className = 'msg typing';
+    div.innerHTML = '<span></span><span></span><span></span>';
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+    return div;
+  }
+</script>
+</body>
+</html>
