@@ -21,6 +21,7 @@
     --muted: #7b7c8d;
     --accent-gold: #f59e0b;
     --border: rgba(124,58,237,0.2);
+    --green: #22c55e;
   }
 
   html { scroll-behavior: smooth; }
@@ -112,7 +113,6 @@
     overflow: hidden;
   }
 
-  /* Scanline overlay — the signature texture */
   #hero::before {
     content: '';
     position: absolute;
@@ -128,7 +128,6 @@
     z-index: 1;
   }
 
-  /* Ambient purple radial bloom */
   #hero::after {
     content: '';
     position: absolute;
@@ -376,9 +375,7 @@
     margin-bottom: 1rem;
   }
 
-  .plan-price {
-    margin-bottom: 0.25rem;
-  }
+  .plan-price { margin-bottom: 0.25rem; }
   .plan-price .amount {
     font-family: 'Orbitron', sans-serif;
     font-size: 2.4rem;
@@ -430,10 +427,14 @@
     text-decoration: none;
     transition: 0.2s;
     letter-spacing: 0.03em;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    border: none;
   }
   .btn-card.outline {
     border: 1px solid var(--border);
     color: var(--text);
+    background: transparent;
   }
   .btn-card.outline:hover { border-color: var(--purple-light); background: var(--purple-glow); }
   .btn-card.solid {
@@ -442,6 +443,357 @@
     box-shadow: 0 0 16px var(--purple-glow);
   }
   .btn-card.solid:hover { background: var(--purple-light); }
+
+  /* ── GALLERY ── */
+  #gallery { background: var(--bg); }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1rem;
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+
+  .gallery-item {
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    aspect-ratio: 4/3;
+    background: var(--card);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .gallery-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 32px rgba(124,58,237,0.3);
+    border-color: rgba(124,58,237,0.5);
+  }
+  .gallery-item.wide {
+    grid-column: span 2;
+    aspect-ratio: 16/7;
+  }
+
+  .gallery-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Simulated PC setup visuals using CSS */
+  .gallery-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.15;
+  }
+
+  .gallery-item:nth-child(1) .gallery-inner { background: linear-gradient(135deg, #1a0533 0%, #2d1060 50%, #0a0b0f 100%); }
+  .gallery-item:nth-child(2) .gallery-inner { background: linear-gradient(135deg, #0a1628 0%, #1a2d50 50%, #0a0b0f 100%); }
+  .gallery-item:nth-child(3) .gallery-inner { background: linear-gradient(135deg, #1a0020 0%, #3d0050 50%, #0a0b0f 100%); }
+  .gallery-item:nth-child(4) .gallery-inner { background: linear-gradient(135deg, #001a0a 0%, #003320 60%, #0a0b0f 100%); }
+  .gallery-item:nth-child(5) .gallery-inner { background: linear-gradient(135deg, #1a1000 0%, #3d2800 60%, #0a0b0f 100%); }
+
+  .gallery-scene {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .gallery-monitor {
+    width: 120px;
+    height: 75px;
+    background: #0d0d1a;
+    border: 2px solid rgba(168,85,247,0.6);
+    border-radius: 4px;
+    margin: 0 auto 4px;
+    position: relative;
+    box-shadow: 0 0 20px rgba(168,85,247,0.3), inset 0 0 10px rgba(168,85,247,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .gallery-item.wide .gallery-monitor {
+    width: 180px;
+    height: 110px;
+  }
+  .gallery-monitor-screen {
+    width: 90%;
+    height: 85%;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+  .gallery-item.wide .gallery-monitor-screen { font-size: 2.2rem; }
+
+  .gallery-item:nth-child(1) .gallery-monitor-screen { background: linear-gradient(160deg, #1a0533, #4c1d95); }
+  .gallery-item:nth-child(2) .gallery-monitor-screen { background: linear-gradient(160deg, #0c1445, #1e40af); }
+  .gallery-item:nth-child(3) .gallery-monitor-screen { background: linear-gradient(160deg, #2d0036, #7c3aed); }
+  .gallery-item:nth-child(4) .gallery-monitor-screen { background: linear-gradient(160deg, #052e16, #166534); }
+  .gallery-item:nth-child(5) .gallery-monitor-screen { background: linear-gradient(160deg, #451a03, #92400e); }
+
+  .gallery-stand {
+    width: 8px;
+    height: 12px;
+    background: rgba(168,85,247,0.4);
+    margin: 0 auto;
+    border-radius: 0 0 2px 2px;
+  }
+  .gallery-base {
+    width: 40px;
+    height: 4px;
+    background: rgba(168,85,247,0.3);
+    margin: 0 auto;
+    border-radius: 2px;
+  }
+
+  .gallery-rgb-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #7c3aed, #a855f7, #ec4899, #f59e0b, #22c55e, #7c3aed);
+    background-size: 200% 100%;
+    animation: rgb-shift 3s linear infinite;
+  }
+  @keyframes rgb-shift {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+  }
+
+  .gallery-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    z-index: 2;
+  }
+  .gallery-label span {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--purple-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(124,58,237,0.0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s, background 0.2s;
+    z-index: 3;
+  }
+  .gallery-item:hover .gallery-overlay {
+    opacity: 1;
+    background: rgba(124,58,237,0.15);
+  }
+  .gallery-overlay span {
+    font-size: 1.5rem;
+    background: rgba(0,0,0,0.6);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Floating particles inside gallery items */
+  .particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--purple-light);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: float-particle 4s ease-in-out infinite;
+  }
+  .particle:nth-child(2) { left: 15%; top: 20%; animation-delay: 0.5s; width: 2px; height: 2px; }
+  .particle:nth-child(3) { left: 75%; top: 30%; animation-delay: 1s; background: #ec4899; }
+  .particle:nth-child(4) { left: 55%; top: 70%; animation-delay: 1.5s; width: 2px; height: 2px; background: #22c55e; }
+  .particle:nth-child(5) { left: 25%; top: 60%; animation-delay: 2s; background: #f59e0b; }
+  @keyframes float-particle {
+    0%, 100% { transform: translateY(0) scale(1); opacity: 0.4; }
+    50% { transform: translateY(-12px) scale(1.3); opacity: 0.9; }
+  }
+
+  /* ── BOOKING ── */
+  #booking { background: var(--surface); }
+
+  .booking-wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .booking-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .booking-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--purple), var(--purple-light), #ec4899);
+  }
+
+  .booking-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  .booking-grid .full { grid-column: 1 / -1; }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .form-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.7rem 1rem;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+  }
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus {
+    border-color: var(--purple-light);
+    box-shadow: 0 0 0 3px rgba(124,58,237,0.15);
+  }
+  .form-input::placeholder,
+  .form-textarea::placeholder { color: var(--muted); }
+
+  .form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237b7c8d' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+  }
+  .form-select option { background: var(--card); color: var(--text); }
+
+  .form-textarea { resize: vertical; min-height: 80px; }
+
+  .booking-note {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    line-height: 1.5;
+  }
+
+  .btn-booking {
+    width: 100%;
+    padding: 0.9rem;
+    background: var(--purple);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    box-shadow: 0 0 24px var(--purple-glow);
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+  .btn-booking:hover {
+    background: var(--purple-light);
+    transform: translateY(-2px);
+    box-shadow: 0 0 36px rgba(168,85,247,0.4);
+  }
+  .btn-booking:active { transform: translateY(0); }
+
+  /* Booking success state */
+  .booking-success {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+  }
+  .booking-success.show { display: block; }
+  .booking-success-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    animation: pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes pop-in {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .booking-success h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--green);
+  }
+  .booking-success p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  .booking-success .wa-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #25d366;
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: opacity 0.2s;
+  }
+  .booking-success .wa-link:hover { opacity: 0.9; }
 
   /* ── FEATURES ── */
   #features { background: var(--bg); }
@@ -668,11 +1020,7 @@
     display: flex; align-items: center; justify-content: center;
     font-size: 1rem;
   }
-  .chat-header-name {
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: #fff;
-  }
+  .chat-header-name { font-weight: 700; font-size: 0.9rem; color: #fff; }
   .chat-header-status {
     font-size: 0.72rem;
     color: rgba(255,255,255,0.75);
@@ -793,6 +1141,69 @@
   .chat-send:hover { background: var(--purple-light); }
   .chat-send svg { width: 16px; height: 16px; fill: #fff; }
 
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    backdrop-filter: blur(8px);
+  }
+  .lightbox.open { display: flex; }
+  .lightbox-inner {
+    max-width: 700px;
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+  }
+  .lightbox-content {
+    width: 100%;
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0,0,0,0.6);
+    border: none;
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .lightbox-close:hover { background: rgba(124,58,237,0.6); }
+  .lightbox-caption {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .lightbox-caption h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--purple-light);
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.06em;
+  }
+  .lightbox-caption p { font-size: 0.8rem; color: var(--muted); }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--border); padding: 1rem 5%; gap: 1rem; }
@@ -806,6 +1217,13 @@
     .features-grid { grid-template-columns: repeat(2, 1fr); }
     .reviews-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
 
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-item.wide { grid-column: span 2; }
+
+    .booking-grid { grid-template-columns: 1fr; }
+    .booking-grid .full { grid-column: 1; }
+    .booking-card { padding: 1.5rem; }
+
     .stats-grid { flex-wrap: wrap; }
     .stat-item { flex: 0 0 33.33%; }
     .stat-item:not(:last-child)::after { display: none; }
@@ -813,7 +1231,7 @@
     .footer-inner { flex-direction: column; }
 
     .chat-modal { width: calc(100vw - 2rem); right: 1rem; bottom: 5.5rem; }
-    .ai-chat-btn { font-size: 0;  width: 56px; height: 56px; border-radius: 50%; padding: 0; justify-content: center; right: 5.5rem; }
+    .ai-chat-btn { font-size: 0; width: 56px; height: 56px; border-radius: 50%; padding: 0; justify-content: center; right: 5.5rem; }
     .ai-chat-btn .dot { display: none; }
     .ai-chat-btn::after { content: '🤖'; font-size: 1.4rem; }
   }
@@ -822,12 +1240,16 @@
     .features-grid { grid-template-columns: 1fr; }
     .hero-btns { flex-direction: column; align-items: center; }
     .stat-value { font-size: 1.6rem; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-item.wide { grid-column: span 1; aspect-ratio: 4/3; }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .hero-title { animation: none; }
     .dot { animation: none; }
     .msg.typing span { animation: none; }
+    .rgb-bar { animation: none; }
+    .particle { animation: none; }
   }
 </style>
 </head>
@@ -838,7 +1260,8 @@
   <span class="nav-logo">ICAFE <span>MERAK JINGGA</span></span>
   <ul class="nav-links" id="navLinks">
     <li><a href="#pricing">Harga</a></li>
-    <li><a href="#features">Fasilitas</a></li>
+    <li><a href="#gallery">Galeri</a></li>
+    <li><a href="#booking">Booking</a></li>
     <li><a href="#reviews">Ulasan</a></li>
     <li><a href="https://wa.me/6282151520525" class="nav-cta">WhatsApp</a></li>
   </ul>
@@ -860,8 +1283,8 @@
       Mulai Rp 8 ribu per jam.
     </p>
     <div class="hero-btns">
-      <a href="https://wa.me/6282151520525?text=Halo%2C%20saya%20mau%20pesan%20tempat%20di%20ICAFE%20Merak%20Jingga" class="btn-primary">
-        🎮 Pesan Sekarang
+      <a href="#booking" class="btn-primary">
+        🎮 Booking Sekarang
       </a>
       <a href="#pricing" class="btn-ghost">
         Lihat Paket →
@@ -897,7 +1320,6 @@
   </div>
 
   <div class="pricing-grid">
-    <!-- 2 JAM -->
     <div class="price-card">
       <div class="plan-name">Paket Cepat</div>
       <div class="plan-price">
@@ -910,10 +1332,9 @@
         <li>AC dingin & headset</li>
         <li>Toilet bersih</li>
       </ul>
-      <a href="https://wa.me/6282151520525" class="btn-card outline">Pilih Paket Ini</a>
+      <button class="btn-card outline" onclick="prefillBooking('Paket Cepat - 2 Jam (Rp 20k)')">Pilih Paket Ini</button>
     </div>
 
-    <!-- 5 JAM (FEATURED) -->
     <div class="price-card featured">
       <div class="featured-badge">⚡ Paling Populer</div>
       <div class="plan-name">Paket Sore</div>
@@ -928,10 +1349,9 @@
         <li>Toilet bersih, loker aman</li>
         <li>Snack & minuman tersedia</li>
       </ul>
-      <a href="https://wa.me/6282151520525?text=Halo%2C%20saya%20mau%20paket%205%20jam%20di%20ICAFE%20Merak%20Jingga" class="btn-card solid">Pesan Paket 5 Jam</a>
+      <button class="btn-card solid" onclick="prefillBooking('Paket Sore - 5 Jam (Rp 40k)')">Pesan Paket 5 Jam</button>
     </div>
 
-    <!-- OVERNIGHT -->
     <div class="price-card">
       <div class="plan-name">Paket Overnight</div>
       <div class="plan-price">
@@ -945,7 +1365,204 @@
         <li>Toilet bersih, loker aman</li>
         <li>Cocok untuk nonstop session</li>
       </ul>
-      <a href="https://wa.me/6282151520525" class="btn-card outline">Pilih Overnight</a>
+      <button class="btn-card outline" onclick="prefillBooking('Paket Overnight - Satu Malam (Rp 70k)')">Pilih Overnight</button>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-header centered">
+    <div class="section-label">Setup Kami</div>
+    <h2 class="section-title">Lihat Sendiri Kelasnya</h2>
+    <p class="section-desc">Setiap unit dirancang untuk pengalaman gaming maksimal — dari lighting sampai performa.</p>
+  </div>
+
+  <div class="gallery-grid">
+
+    <!-- Item 1: Wide - Main area -->
+    <div class="gallery-item wide" onclick="openLightbox(0)">
+      <div class="gallery-inner">
+        <div class="particle" style="left:10%;top:25%;"></div>
+        <div class="particle" style="left:30%;top:15%;"></div>
+        <div class="particle" style="left:80%;top:40%;"></div>
+        <div class="particle" style="left:60%;top:75%;"></div>
+        <div class="particle" style="left:45%;top:20%;"></div>
+        <div class="gallery-scene">
+          <div class="gallery-monitor">
+            <div class="gallery-monitor-screen">🎮</div>
+            <div class="gallery-rgb-bar"></div>
+          </div>
+          <div class="gallery-stand"></div>
+          <div class="gallery-base"></div>
+        </div>
+        <div class="gallery-label"><span>Ruang Gaming Utama · 30+ Unit</span></div>
+        <div class="gallery-overlay"><span>🔍</span></div>
+      </div>
+    </div>
+
+    <!-- Item 2: PC Setup detail -->
+    <div class="gallery-item" onclick="openLightbox(1)">
+      <div class="gallery-inner">
+        <div class="particle" style="left:20%;top:30%;"></div>
+        <div class="particle" style="left:70%;top:20%;"></div>
+        <div class="particle" style="left:50%;top:65%;"></div>
+        <div class="gallery-scene">
+          <div class="gallery-monitor">
+            <div class="gallery-monitor-screen">⚡</div>
+            <div class="gallery-rgb-bar"></div>
+          </div>
+          <div class="gallery-stand"></div>
+          <div class="gallery-base"></div>
+        </div>
+        <div class="gallery-label"><span>GPU RTX Terkini</span></div>
+        <div class="gallery-overlay"><span>🔍</span></div>
+      </div>
+    </div>
+
+    <!-- Item 3: VIP area -->
+    <div class="gallery-item" onclick="openLightbox(2)">
+      <div class="gallery-inner">
+        <div class="particle" style="left:15%;top:40%;"></div>
+        <div class="particle" style="left:75%;top:25%;"></div>
+        <div class="particle" style="left:40%;top:70%;"></div>
+        <div class="gallery-scene">
+          <div class="gallery-monitor">
+            <div class="gallery-monitor-screen">👑</div>
+            <div class="gallery-rgb-bar"></div>
+          </div>
+          <div class="gallery-stand"></div>
+          <div class="gallery-base"></div>
+        </div>
+        <div class="gallery-label"><span>Zona VIP · Kursi Ergonomis</span></div>
+        <div class="gallery-overlay"><span>🔍</span></div>
+      </div>
+    </div>
+
+    <!-- Item 4: Squad area -->
+    <div class="gallery-item" onclick="openLightbox(3)">
+      <div class="gallery-inner">
+        <div class="particle" style="left:25%;top:20%;"></div>
+        <div class="particle" style="left:65%;top:50%;"></div>
+        <div class="particle" style="left:35%;top:75%;"></div>
+        <div class="gallery-scene">
+          <div class="gallery-monitor">
+            <div class="gallery-monitor-screen">🏆</div>
+            <div class="gallery-rgb-bar"></div>
+          </div>
+          <div class="gallery-stand"></div>
+          <div class="gallery-base"></div>
+        </div>
+        <div class="gallery-label"><span>Area Squad · Main Bareng</span></div>
+        <div class="gallery-overlay"><span>🔍</span></div>
+      </div>
+    </div>
+
+    <!-- Item 5: Snack bar -->
+    <div class="gallery-item" onclick="openLightbox(4)">
+      <div class="gallery-inner">
+        <div class="particle" style="left:30%;top:35%;"></div>
+        <div class="particle" style="left:70%;top:60%;"></div>
+        <div class="particle" style="left:55%;top:15%;"></div>
+        <div class="gallery-scene">
+          <div class="gallery-monitor">
+            <div class="gallery-monitor-screen">🍜</div>
+            <div class="gallery-rgb-bar"></div>
+          </div>
+          <div class="gallery-stand"></div>
+          <div class="gallery-base"></div>
+        </div>
+        <div class="gallery-label"><span>Snack & Minuman 24 Jam</span></div>
+        <div class="gallery-overlay"><span>🔍</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <div class="lightbox-content" id="lightboxContent"></div>
+    <div class="lightbox-caption">
+      <h3 id="lightboxTitle"></h3>
+      <p id="lightboxDesc"></p>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="section-header centered">
+    <div class="section-label">Reservasi Tempat</div>
+    <h2 class="section-title">Booking Online, Langsung Aman</h2>
+    <p class="section-desc">Isi form di bawah — tim kami akan konfirmasi via WhatsApp dalam hitungan menit.</p>
+  </div>
+
+  <div class="booking-wrapper">
+    <div class="booking-card">
+      <div id="bookingForm">
+        <div class="booking-grid">
+          <div class="form-group">
+            <label class="form-label" for="bookName">Nama Lengkap</label>
+            <input type="text" id="bookName" class="form-input" placeholder="Nama kamu..." autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="bookPhone">No. WhatsApp</label>
+            <input type="tel" id="bookPhone" class="form-input" placeholder="08xx-xxxx-xxxx" autocomplete="tel">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="bookDate">Tanggal Kedatangan</label>
+            <input type="date" id="bookDate" class="form-input">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="bookTime">Jam Kedatangan</label>
+            <input type="time" id="bookTime" class="form-input">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="bookPackage">Pilih Paket</label>
+            <select id="bookPackage" class="form-select">
+              <option value="">-- Pilih paket --</option>
+              <option value="Paket Cepat - 2 Jam (Rp 20k)">Paket Cepat — 2 Jam · Rp 20k</option>
+              <option value="Paket Sore - 5 Jam (Rp 40k)">Paket Sore — 5 Jam · Rp 40k ⚡ Populer</option>
+              <option value="Paket Overnight - Satu Malam (Rp 70k)">Paket Overnight · Rp 70k</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="bookPeople">Jumlah Orang</label>
+            <select id="bookPeople" class="form-select">
+              <option value="1">1 orang</option>
+              <option value="2">2 orang</option>
+              <option value="3">3 orang</option>
+              <option value="4">4 orang</option>
+              <option value="5+">5+ orang (squad)</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label class="form-label" for="bookNote">Catatan (opsional)</label>
+            <textarea id="bookNote" class="form-textarea" placeholder="Minta PC tertentu, butuh kursi berdekatan, dll..."></textarea>
+          </div>
+        </div>
+        <p class="booking-note">
+          ℹ️ Booking dikonfirmasi via WhatsApp. Tiba lebih dari 30 menit setelah jam booking, slot bisa diberikan ke pengunjung lain. ICAFE buka 24 jam, walk-in juga selalu diterima!
+        </p>
+        <button class="btn-booking" onclick="submitBooking()">
+          🎮 Kirim Booking via WhatsApp
+        </button>
+      </div>
+
+      <div class="booking-success" id="bookingSuccess">
+        <div class="booking-success-icon">✅</div>
+        <h3>Booking Berhasil Dikirim!</h3>
+        <p>Pesan WhatsApp sudah disiapkan untuk kamu. Klik tombol di bawah untuk mengirimnya ke tim kami — konfirmasi biasanya dalam 5 menit.</p>
+        <a href="#" id="waConfirmLink" class="wa-link" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Kirim ke WhatsApp Sekarang
+        </a>
+        <br><br>
+        <button onclick="resetBooking()" style="background:none;border:none;color:var(--muted);font-size:0.8rem;cursor:pointer;text-decoration:underline;">Buat booking baru</button>
+      </div>
     </div>
   </div>
 </section>
@@ -1062,7 +1679,7 @@
     <button class="chat-close" onclick="toggleChat()">✕</button>
   </div>
   <div class="chat-messages" id="chatMessages">
-    <div class="msg bot">Halo! Saya asisten ICAFE Merak Jingga 👾 Mau tanya soal harga, fasilitas, atau langsung pesan tempat? Tanya aja!</div>
+    <div class="msg bot">Halo! Saya asisten ICAFE Merak Jingga 👾 Mau tanya soal harga, fasilitas, atau langsung booking? Tanya aja!</div>
   </div>
   <div class="chat-input-area">
     <textarea class="chat-input" id="chatInput" placeholder="Ketik pesanmu..." rows="1" onkeydown="handleKey(event)"></textarea>
@@ -1073,7 +1690,136 @@
 </div>
 
 <script>
-  const SYSTEM_PROMPT = `You are a sales agent for ICAFE Merak Jingga, a top-rated (4.9★) gaming café in Medan open 24 hours. Your job is to convert every inquiry into a booking or visit. Lead with the value: premium specs, zero lag, 1Gbps fiber, clean bathrooms, AC — all for Rp 40k/5 hours. Counter price objections by anchoring to the per-hour cost (Rp 8k/hour). For overnight visitors, highlight the Rp 70k overnight package. Always close with a specific call-to-action: "Mau langsung ke sini sekarang? Kami buka 24 jam — Jl. Putri Merak Jingga No.63." Respond in Indonesian, be friendly and conversational. Keep responses concise (2-4 sentences max). Use gaming slang naturally when appropriate. Never use markdown formatting — plain text only.`;
+  // ── GALLERY DATA ──
+  const galleryData = [
+    {
+      title: 'Ruang Gaming Utama',
+      desc: '30+ unit PC gaming premium tersusun rapi dengan pencahayaan RGB. Setiap kursi ergonomis dan jarak antar unit nyaman.',
+      emoji: '🎮',
+      bg: 'linear-gradient(135deg, #1a0533 0%, #2d1060 50%, #0a0b0f 100%)'
+    },
+    {
+      title: 'GPU RTX Terkini',
+      desc: 'Setiap unit dilengkapi kartu grafis generasi terbaru. Semua game AAA berjalan di setting tertinggi tanpa hambatan.',
+      emoji: '⚡',
+      bg: 'linear-gradient(135deg, #0a1628 0%, #1a2d50 50%, #0a0b0f 100%)'
+    },
+    {
+      title: 'Zona VIP',
+      desc: 'Area eksklusif dengan kursi gaming premium, partisi privat, dan monitor ultrawide. Untuk sesi gaming serius.',
+      emoji: '👑',
+      bg: 'linear-gradient(135deg, #1a0020 0%, #3d0050 50%, #0a0b0f 100%)'
+    },
+    {
+      title: 'Area Squad',
+      desc: 'Zona khusus untuk main bareng tim. Kursi berdekatan, LAN party ready, komunikasi tanpa gangguan.',
+      emoji: '🏆',
+      bg: 'linear-gradient(135deg, #001a0a 0%, #003320 60%, #0a0b0f 100%)'
+    },
+    {
+      title: 'Snack Bar 24 Jam',
+      desc: 'Tersedia minuman dingin, snack, mie instan, dan berbagai pilihan makanan ringan. Nggak perlu keluar buat isi tenaga.',
+      emoji: '🍜',
+      bg: 'linear-gradient(135deg, #1a1000 0%, #3d2800 60%, #0a0b0f 100%)'
+    }
+  ];
+
+  // ── LIGHTBOX ──
+  function openLightbox(idx) {
+    const item = galleryData[idx];
+    const lb = document.getElementById('lightbox');
+    const content = document.getElementById('lightboxContent');
+    content.style.background = item.bg;
+    content.innerHTML = `
+      <div style="text-align:center;">
+        <div style="font-size:5rem;margin-bottom:1rem;">${item.emoji}</div>
+        <div style="font-family:'Orbitron',sans-serif;font-size:0.75rem;color:rgba(168,85,247,0.8);letter-spacing:0.15em;text-transform:uppercase;">ICAFE MERAK JINGGA</div>
+      </div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7c3aed,#a855f7,#ec4899,#f59e0b,#22c55e,#7c3aed);background-size:200%;animation:rgb-shift 3s linear infinite;"></div>
+    `;
+    document.getElementById('lightboxTitle').textContent = item.title;
+    document.getElementById('lightboxDesc').textContent = item.desc;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeLightboxOutside(e) {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  // ── BOOKING ──
+  // Set min date to today
+  const dateInput = document.getElementById('bookDate');
+  if (dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
+    dateInput.value = today;
+  }
+
+  function prefillBooking(packageName) {
+    document.getElementById('bookPackage').value = packageName;
+    document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => document.getElementById('bookName').focus(), 600);
+  }
+
+  function submitBooking() {
+    const name = document.getElementById('bookName').value.trim();
+    const phone = document.getElementById('bookPhone').value.trim();
+    const date = document.getElementById('bookDate').value;
+    const time = document.getElementById('bookTime').value;
+    const pkg = document.getElementById('bookPackage').value;
+    const people = document.getElementById('bookPeople').value;
+    const note = document.getElementById('bookNote').value.trim();
+
+    if (!name) { alert('Mohon isi nama lengkap kamu.'); document.getElementById('bookName').focus(); return; }
+    if (!phone) { alert('Mohon isi nomor WhatsApp kamu.'); document.getElementById('bookPhone').focus(); return; }
+    if (!date) { alert('Pilih tanggal kedatangan.'); document.getElementById('bookDate').focus(); return; }
+    if (!time) { alert('Pilih jam kedatangan.'); document.getElementById('bookTime').focus(); return; }
+    if (!pkg) { alert('Pilih paket yang diinginkan.'); document.getElementById('bookPackage').focus(); return; }
+
+    const formattedDate = new Date(date).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    const [h, m] = time.split(':');
+    const formattedTime = `${h}.${m} WIB`;
+
+    let msg = `Halo ICAFE Merak Jingga! 👋\n\nSaya mau booking tempat:\n\n`;
+    msg += `👤 *Nama:* ${name}\n`;
+    msg += `📱 *WA:* ${phone}\n`;
+    msg += `📅 *Tanggal:* ${formattedDate}\n`;
+    msg += `🕐 *Jam:* ${formattedTime}\n`;
+    msg += `🎮 *Paket:* ${pkg}\n`;
+    msg += `👥 *Jumlah:* ${people} orang\n`;
+    if (note) msg += `📝 *Catatan:* ${note}\n`;
+    msg += `\nMohon konfirmasinya ya! Terima kasih 🙏`;
+
+    const waUrl = `https://wa.me/6282151520525?text=${encodeURIComponent(msg)}`;
+    document.getElementById('waConfirmLink').href = waUrl;
+
+    document.getElementById('bookingForm').style.display = 'none';
+    document.getElementById('bookingSuccess').classList.add('show');
+  }
+
+  function resetBooking() {
+    document.getElementById('bookingForm').style.display = 'block';
+    document.getElementById('bookingSuccess').classList.remove('show');
+    document.getElementById('bookName').value = '';
+    document.getElementById('bookPhone').value = '';
+    document.getElementById('bookTime').value = '';
+    document.getElementById('bookPackage').value = '';
+    document.getElementById('bookPeople').value = '1';
+    document.getElementById('bookNote').value = '';
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('bookDate').value = today;
+  }
+
+  // ── AI CHAT ──
+  const SYSTEM_PROMPT = `You are a sales agent for ICAFE Merak Jingga, a top-rated (4.9★) gaming café in Medan open 24 hours. Your job is to convert every inquiry into a booking or visit. Lead with the value: premium specs, zero lag, 1Gbps fiber, clean bathrooms, AC — all for Rp 40k/5 hours. Counter price objections by anchoring to the per-hour cost (Rp 8k/hour). For overnight visitors, highlight the Rp 70k overnight package. Always close with a specific call-to-action: "Mau langsung booking? Scroll ke bagian Booking di halaman ini, atau ke sini sekarang — Jl. Putri Merak Jingga No.63, buka 24 jam!" Respond in Indonesian, be friendly and conversational. Keep responses concise (2-4 sentences max). Use gaming slang naturally when appropriate. Never use markdown formatting — plain text only.`;
 
   let chatOpen = false;
   let chatHistory = [];
